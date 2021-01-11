@@ -11,9 +11,9 @@ stdenv.mkDerivation {
   [ 
   ];
   installPhase = ''
-    mkdir -p $out
-    cp aufs2overlay.sh $out
+    mkdir -p $out/bin
+    cp aufs2overlay.sh $out/bin
     cp -r conf $out
-    cp balenaos-in-container.sh $out
+    cp balenaos-in-container.sh $out/bin
   '';
 }
