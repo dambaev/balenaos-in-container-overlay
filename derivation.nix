@@ -12,7 +12,7 @@ stdenv.mkDerivation {
   ];
   buildPhase = ''
     sed -i 's/set -e/set -ex/' balenaos-in-container.sh
-    patchShebangs balenaos-in-containers.sh
+    patchShebangs balenaos-in-container.sh
   '';
   dontPatchShebangs = true;
   installPhase = ''
