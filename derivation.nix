@@ -12,13 +12,16 @@ stdenv.mkDerivation {
   ];
   buildPhase = ''
     sed -i 's/set -e/set -ex/' balenaos-in-container.sh
+    sed -i 's/\$(cd "\$(dirname "\$0")" ; pwd)/\$(cd "\$(dirname "\$(readlink -f \$0)")" ; pwd)/' balenaos-in-container.sh
     patchShebangs balenaos-in-container.sh
   '';
   dontPatchShebangs = true;
   installPhase = ''
     mkdir -p $out/bin
-    cp aufs2overlay.sh $out/bin
-    cp -r conf $out
-    cp balenaos-in-container.sh $out/bin
+    mkdir -p $out/share
+    cp aufs2overlay.sh $out/share
+    cp -r conf $out/share/
+    cp balenaos-in-container.sh $out/share/
+    ln -s $out/share/balenaos-in-container.sh $out/bin/
   '';
 }
